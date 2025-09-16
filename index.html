@@ -299,16 +299,71 @@
         opacity: 1;
         pointer-events: auto;
       }
+
+      #interesting-links {
+        padding: 40px 20px;
+        max-width: 800px;
+        margin: 0 auto;
+      }
+
+      #interesting-links h2 {
+        text-align: center;
+        margin-bottom: 30px;
+        font-size: 2rem;
+        color: #333;
+      }
+
+      .link-group {
+        margin-bottom: 40px;
+      }
+
+      .link-group h3 {
+        color: #444;
+        margin-bottom: 12px;
+        font-size: 1.3rem;
+      }
+
+      .link-group ul {
+        list-style: none;
+        padding-left: 0;
+      }
+
+      .link-group li {
+        margin-bottom: 10px;
+      }
+
+      .link-group a {
+        text-decoration: none;
+        color: #2a6cdf;
+        font-weight: 500;
+        transition: color 0.3s ease;
+      }
+
+      .link-group a:hover {
+        color: #174ea6;
+        text-decoration: underline;
+      }
+
+      /* Responsive text */
+      @media (max-width: 600px) {
+        #interesting-links h2 {
+          font-size: 1.5rem;
+        }
+
+        .link-group h3 {
+          font-size: 1.1rem;
+        }
+      }
     </style>
   </head>
   <body>
     <div id="orientation-overlay"></div>
     <div id="rotate-message">
-      Please rotate your device to landscape for the best experience.
+      Please rotate your device to landscape for the best experience
     </div>
 
     <header class="header">
-      <h1>My Simple Site</h1>
+      <h1>Quick Reference Guide</h1>
       <div
         class="hamburger"
         id="hamburger"
@@ -322,15 +377,23 @@
       </div>
       <nav id="nav-menu" aria-label="Main navigation">
         <a href="#" data-page="home">Home</a>
-        <a href="#" data-page="md5-demo">MD5 Demo</a>
+        <a href="#" data-page="md5-demo">Hash Functions</a>
         <a href="#" data-page="server-info">What is a Server?</a>
+        <a href="#" data-page="interesting-links"
+          >Interesting Links for Later On</a
+        >
       </nav>
     </header>
 
     <main>
       <section id="home" class="page active">
-        <h2>Hello!</h2>
-        <p>Welcome to the homepage.</p>
+        <h2>Welcome to Quantum Computation Fundamentals</h2>
+        <p>Turning puzzles into possibilities...</p>
+
+        <p>
+          Use the <b>menu at the top of the screen</b> to have a look over some
+          useful refreshers before the presentation begins!
+        </p>
       </section>
 
       <section id="md5-demo" class="page">
@@ -340,8 +403,9 @@
             A hash function takes an input (or 'message') and returns a
             fixed-size string of bytes. The output is typically a seemingly
             random sequence of characters, known as the hash or digest. Hash
-            functions are widely used in security, data integrity, and many
-            computer science applications.
+            functions are widely used in <b>security</b>,
+            <b>digital signatures</b>, <b>message authentication</b>,
+            <b>integrity</b>, and many other computer science applications.
           </p>
           <div class="principles-container">
             <div class="principle-box">
@@ -407,6 +471,52 @@
           file servers. They play a crucial role in enabling the internet and
           many networked applications.
         </p>
+      </section>
+
+      <section id="interesting-links" class="page">
+        <h2>Links for Later On</h2>
+
+        <div class="link-group">
+          <h3>Links About Dogs</h3>
+          <ul>
+            <li>
+              <a href="https://www.akc.org/dog-breeds/" target="_blank"
+                >Dog Breeds - AKC</a
+              >
+            </li>
+            <li>
+              <a href="https://en.wikipedia.org/wiki/Dog" target="_blank"
+                >Dog - Wikipedia</a
+              >
+            </li>
+            <li>
+              <a href="https://www.cesarsway.com/" target="_blank"
+                >Cesar’s Dog Training Advice</a
+              >
+            </li>
+          </ul>
+        </div>
+
+        <div class="link-group">
+          <h3>Links About Cats</h3>
+          <ul>
+            <li>
+              <a href="https://www.catster.com/" target="_blank"
+                >Catster - Cat Health & Lifestyle</a
+              >
+            </li>
+            <li>
+              <a href="https://en.wikipedia.org/wiki/Cat" target="_blank"
+                >Cat - Wikipedia</a
+              >
+            </li>
+            <li>
+              <a href="https://www.aspca.org/pet-care/cat-care" target="_blank"
+                >ASPCA Cat Care</a
+              >
+            </li>
+          </ul>
+        </div>
       </section>
     </main>
 
