@@ -341,6 +341,65 @@
         color: #7f2d28;
       }
 
+      /* Description styles for quantum principles */
+      #key-quantum-concepts .description {
+        max-width: 900px;
+        margin: 0 auto 50px auto;
+        text-align: left;
+        color: #f0f0f0; /* Light text */
+      }
+
+      #key-quantum-concepts .description h2 {
+        text-align: center;
+        margin-bottom: 20px;
+        color: #f0f0f0; /* Light text */
+      }
+
+      #key-quantum-concepts .principles-container {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 16px;
+        width: 100%;
+        max-width: 100%;
+        box-sizing: border-box;
+        padding: 0 20px; /* Add horizontal padding to match the description-top spacing */
+      }
+
+      /* Floating red boxes */
+      #key-quantum-concepts .principle-box {
+        background: #fff0f0;
+        border: 2px solid #e74c3c;
+        border-radius: 8px;
+        padding: 12px 16px;
+        max-width: 300px;
+        width: 100%;
+        box-shadow: 0 4px 8px rgba(231, 76, 60, 0.2);
+        font-weight: 600;
+        color: #c0392b;
+        transition: transform 0.2s ease;
+        box-sizing: border-box;
+        display: inline-block; /* ← allows it to shrink-wrap height */
+      }
+
+      #key-quantum-concepts .principle-box:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 16px rgba(231, 76, 60, 0.35);
+      }
+
+      #key-quantum-concepts .principle-title {
+        font-size: clamp(16px, 3vw, 18px);
+        margin-bottom: 8px;
+        text-align: center;
+      }
+
+      #key-quantum-concepts .principle-desc {
+        font-size: clamp(12px, 2.5vw, 14px);
+        line-height: 1.4;
+        text-align: center;
+        color: #7f2d28;
+      }
+
       /* Responsive tweaks */
       @media (max-width: 600px) {
         main {
@@ -417,7 +476,24 @@
         margin: 0 auto;
       }
 
+      #interesting-links .description {
+        margin-bottom: 3rem;
+      }
+
       #interesting-links h2 {
+        text-align: center;
+        margin-bottom: 30px;
+        font-size: 2rem;
+        color: #f0f0f0; /* Light text */
+      }
+
+      #get-in-touch {
+        padding: 40px 20px;
+        max-width: 800px;
+        margin: 0 auto;
+      }
+
+      #get-in-touch h2 {
         text-align: center;
         margin-bottom: 30px;
         font-size: 2rem;
@@ -463,9 +539,95 @@
         text-decoration: underline;
       }
 
+      .link-group-not-covered {
+        /* margin-bottom: 40px; */
+        background-color: #1e1e1e;
+        padding: 30px 20px;
+        border-radius: 12px;
+        max-width: 90%;
+        box-shadow: 0 0 16px red, 0 0 4px violet;
+        transition: transform 0.3s ease;
+        margin-bottom: 3rem; /* scales with root font size */
+      }
+
+      .link-group-not-covered h3 {
+        color: #f0f0f0; /* Light text */
+        margin-bottom: 12px;
+        font-size: 1.3rem;
+      }
+
+      .link-group-not-covered ul {
+        list-style: none;
+        padding-left: 0;
+      }
+
+      .link-group-not-covered li {
+        margin-bottom: 10px;
+      }
+
+      .link-group-not-covered a {
+        text-decoration: none;
+        color: #c1d7ff;
+        font-weight: 500;
+        transition: color 0.3s ease;
+      }
+
+      .link-group-not-covered a:hover {
+        color: #90b9fb;
+        text-decoration: underline;
+      }
+
+      .linkedin-box {
+        display: flex;
+        justify-content: center;
+        margin-top: 30px;
+        padding: 20px;
+        background-color: #121212; /* Dark background so can't see*/
+        border-radius: 20px;
+
+        width: fit-content;
+        margin-left: auto;
+        margin-right: auto;
+      }
+
+      .linkedin-btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 14px;
+        padding: 16px 24px;
+        border-radius: 40px;
+
+        color: white;
+        font-weight: 600;
+        text-decoration: none;
+        font-size: 1.25rem;
+        transition: transform 0.2s ease, box-shadow 0.3s ease;
+        box-shadow: 0 0 4px red, 0 0 6px orange, 0 0 8px yellow, 0 0 10px green,
+          0 0 12px blue, 0 0 14px indigo, 0 0 16px violet;
+      }
+
+      .linkedin-btn:hover {
+        transform: scale(1.05);
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4);
+      }
+
+      .linkedin-btn img {
+        width: 28px;
+        height: 28px;
+        filter: brightness(0) invert(1);
+      }
+
+      .linkedin-btn span {
+        color: white;
+      }
+
       /* Responsive text */
       @media (max-width: 600px) {
         #interesting-links h2 {
+          font-size: 1.5rem;
+        }
+
+        #get-in-touch h2 {
           font-size: 1.5rem;
         }
 
@@ -497,10 +659,11 @@
       <nav id="nav-menu" aria-label="Main navigation">
         <a href="#" data-page="home">Home</a>
         <a href="#" data-page="md5-demo">Hash Functions</a>
-        <a href="#" data-page="server-info">What is a Server?</a>
+        <a href="#" data-page="key-quantum-concepts">Key Quantum Principles</a>
         <a href="#" data-page="interesting-links"
           >Interesting Links for Later On</a
         >
+        <a href="#" data-page="get-in-touch">Get In Touch</a>
       </nav>
     </header>
 
@@ -539,7 +702,9 @@
               random sequence of characters, known as the hash or digest. Hash
               functions are widely used in <b>security</b>,
               <b>digital signatures</b>, <b>message authentication</b>,
-              <b>integrity</b>, and many other computer science applications.
+              <b>integrity checks</b>, <b>blockchain</b>, <b>cryptocurrency</b>,
+              <b>storing/validating passwords</b> and many other secure
+              applications.
             </p>
           </div>
           <div class="principles-container">
@@ -584,26 +749,75 @@
         </div>
       </section>
 
-      <section id="server-info" class="page">
-        <h2>What is a Server?</h2>
-        <p>
-          A server is a computer or system that provides resources, data,
-          services, or programs to other computers, known as clients, over a
-          network. Servers can serve many clients simultaneously and often run
-          specialized software to manage these requests.
-        </p>
-        <p>
-          Common types of servers include web servers, database servers, and
-          file servers. They play a crucial role in enabling the internet and
-          many networked applications.
-        </p>
+      <section id="key-quantum-concepts" class="page">
+        <div class="description">
+          <div class="description-top">
+            <h2>Key Quantum Principles</h2>
+            <p>
+              There are a handful of very famous and important principles you
+              should know about any state that is in a quantum 'superposition'.
+              Refer back to these as you need to help you follow along!
+            </p>
+          </div>
+          <div class="principles-container">
+            <div class="principle-box">
+              <div class="principle-title">Superpostion</div>
+              <div class="principle-desc">
+                A qubit can be in a combination of both |0⟩ and |1⟩ states at
+                the same time. This allows quantum systems to represent many
+                possible outcomes simultaneously, unlike classical bits which
+                are either 0 or 1.
+              </div>
+            </div>
+            <div class="principle-box">
+              <div class="principle-title">
+                Mesuring a State Causes Collapse
+              </div>
+              <div class="principle-desc">
+                Taking a measurement of (looking at) a quantum state causes it
+                to immediately collapse into a basis state. It is no longer
+                representing many things at once. The outcome is probabilistic,
+                not deterministic.
+              </div>
+            </div>
+
+            <div class="principle-box">
+              <div class="principle-title">Entanglement</div>
+              <div class="principle-desc">
+                Qubits can become entangled, meaning the state of one qubit
+                cannot be described independently of the other. Measuring one
+                instantly affects the state of the other — even across distance.
+                We can use this to <b>teleport information</b>
+                <i>(yes, really)</i> and
+                <b>defend against man-in-the-middle attacks</b>.
+              </div>
+            </div>
+
+            <div class="principle-box">
+              <div class="principle-title">Interference</div>
+              <div class="principle-desc">
+                Quantum amplitudes can interfere constructively or
+                destructively. Algorithms use this to amplify correct results
+                and cancel out wrong ones. This is what gives quantum algorithms
+                their power, e.g., Grover's search.
+              </div>
+            </div>
+          </div>
+        </div>
       </section>
 
       <section id="interesting-links" class="page">
         <h2>Links for Later On</h2>
 
+        <p>
+          Here you'll find some useful links in case you were interested in a
+          particular topic today, or just want to find out more! There are some
+          extra links highlighted covering interesting topics that we've not
+          been over today!
+        </p>
+
         <div class="link-group">
-          <h3>Links About Dogs</h3>
+          <h3>Shor's Algorithm</h3>
           <ul>
             <li>
               <a href="https://www.akc.org/dog-breeds/" target="_blank"
@@ -624,7 +838,7 @@
         </div>
 
         <div class="link-group">
-          <h3>Links About Cats</h3>
+          <h3>Grover's Algorithm</h3>
           <ul>
             <li>
               <a href="https://www.catster.com/" target="_blank"
@@ -636,12 +850,106 @@
                 >Cat - Wikipedia</a
               >
             </li>
+          </ul>
+        </div>
+
+        <div class="link-group">
+          <h3>Quantum Physics Basics</h3>
+          <ul>
             <li>
-              <a href="https://www.aspca.org/pet-care/cat-care" target="_blank"
-                >ASPCA Cat Care</a
+              <a href="https://www.catster.com/" target="_blank"
+                >Catster - Cat Health & Lifestyle</a
+              >
+            </li>
+            <li>
+              <a href="https://en.wikipedia.org/wiki/Cat" target="_blank"
+                >Cat - Wikipedia</a
               >
             </li>
           </ul>
+        </div>
+
+        <div class="link-group">
+          <h3>Real Life Quantum Use Cases</h3>
+          <ul>
+            <li>
+              <a href="https://www.catster.com/" target="_blank"
+                >Catster - Cat Health & Lifestyle</a
+              >
+            </li>
+            <li>
+              <a href="https://en.wikipedia.org/wiki/Cat" target="_blank"
+                >Cat - Wikipedia</a
+              >
+            </li>
+          </ul>
+        </div>
+
+        <div class="link-group-not-covered">
+          <h3>Unitary Evolution (Reversibility)</h3>
+          <ul>
+            <li>
+              <a href="https://www.akc.org/dog-breeds/" target="_blank"
+                >Dog Breeds - AKC</a
+              >
+            </li>
+            <li>
+              <a href="https://en.wikipedia.org/wiki/Dog" target="_blank"
+                >Dog - Wikipedia</a
+              >
+            </li>
+            <li>
+              <a href="https://www.cesarsway.com/" target="_blank"
+                >Cesar’s Dog Training Advice</a
+              >
+            </li>
+          </ul>
+        </div>
+
+        <div class="link-group-not-covered">
+          <h3>No Cloning Theorem</h3>
+          <ul>
+            <li>
+              <a href="https://www.akc.org/dog-breeds/" target="_blank"
+                >Dog Breeds - AKC</a
+              >
+            </li>
+          </ul>
+        </div>
+
+        <div class="link-group-not-covered">
+          <h3>Teleportation</h3>
+          <ul>
+            <li>
+              <a href="https://www.akc.org/dog-breeds/" target="_blank"
+                >Dog Breeds - AKC</a
+              >
+            </li>
+
+            <li>
+              <a href="https://www.cesarsway.com/" target="_blank"
+                >Cesar’s Dog Training Advice</a
+              >
+            </li>
+          </ul>
+        </div>
+      </section>
+
+      <section id="get-in-touch" class="page">
+        <h2>Get In Touch</h2>
+
+        <div class="linkedin-box">
+          <a
+            href="https://uk.linkedin.com/in/daniel-parry-702010235"
+            target="_blank"
+            class="linkedin-btn"
+          >
+            <img
+              src="https://cdn-icons-png.flaticon.com/512/174/174857.png"
+              alt="LinkedIn"
+            />
+            <span>LinkedIn</span>
+          </a>
         </div>
       </section>
     </main>
