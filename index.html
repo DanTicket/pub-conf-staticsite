@@ -1,1 +1,61 @@
-<h1>Hi</h1>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>MD5 Hash Demo</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 50px;
+      background-color: #f9f9f9;
+      text-align: center;
+    }
+
+    h1 {
+      color: #333;
+    }
+
+    input[type="text"] {
+      padding: 10px;
+      width: 300px;
+      font-size: 16px;
+    }
+
+    button {
+      padding: 10px 20px;
+      font-size: 16px;
+      margin-left: 10px;
+      cursor: pointer;
+    }
+
+    .output {
+      margin-top: 30px;
+      font-family: monospace;
+      background: #eee;
+      padding: 15px;
+      display: inline-block;
+      word-break: break-all;
+      max-width: 80%;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>MD5 Hash Generator</h1>
+
+  <input type="text" id="inputText" placeholder="Enter text here..." />
+  <button onclick="generateHash()">Hash It</button>
+
+  <div class="output" id="outputHash">MD5 hash will appear here</div>
+
+  <script>
+    function generateHash() {
+      const input = document.getElementById('inputText').value;
+      const hash = CryptoJS.MD5(input).toString();
+      document.getElementById('outputHash').innerText = hash;
+    }
+  </script>
+
+</body>
+</html>
