@@ -1,61 +1,590 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>MD5 Hash Demo (String vs Integer Bytes)</title>
+    <script src="https://cdn.jsdelivr.net/npm/spark-md5@3.0.2/spark-md5.min.js"></script>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        padding: 50px;
+        background-color: #f9f9f9;
+        text-align: center;
+      }
+      input[type='text'] {
+        padding: 10px;
+        width: 300px;
+        font-size: 16px;
+      }
+      button {
+        padding: 10px 20px;
+        font-size: 16px;
+        margin-left: 10px;
+        cursor: pointer;
+      }
+      .output {
+        margin-top: 30px;
+        font-family: monospace;
+        background: #eee;
+        padding: 15px;
+        display: inline-block;
+        word-break: break-word;
+        max-width: 80%;
+      }
+      /* Description styles */
+      .description {
+        max-width: 900px;
+        margin: 0 auto 50px auto;
+        text-align: left;
+      }
+      .description h2 {
+        text-align: center;
+        margin-bottom: 20px;
+      }
+      .principles-container {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 20px;
+      }
+      .principle-box {
+        border: 2px solid #e74c3c; /* pretty red */
+        border-radius: 8px;
+        padding: 20px;
+        width: 260px;
+        background: #fff0f0;
+        box-shadow: 0 4px 8px rgba(231, 76, 60, 0.2);
+        font-weight: 600;
+        color: #c0392b;
+        transition: transform 0.2s ease;
+      }
+      .principle-box:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 16px rgba(231, 76, 60, 0.35);
+      }
+      .principle-title {
+        font-size: 18px;
+        margin-bottom: 8px;
+        text-align: center;
+      }
+      .principle-desc {
+        font-size: 14px;
+        line-height: 1.4;
+        text-align: center;
+        color: #7f2d28;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="description">
+      <h2>What is a Hash Function?</h2>
+      <p>
+        A hash function takes an input (or 'message') and returns a fixed-size
+        string of bytes. The output is typically a seemingly random sequence of
+        characters, known as the hash or digest. Hash functions are widely used
+        in security, data integrity, and many computer science applications.
+      </p>
+      <div class="principles-container">
+        <div class="principle-box">
+          <div class="principle-title">Deterministic</div>
+          <div class="principle-desc">
+            The same input always produces the same output hash.
+          </div>
+        </div>
+        <div class="principle-box">
+          <div class="principle-title">Fixed Output Size</div>
+          <div class="principle-desc">
+            No matter the input size, the hash output length is always constant.
+          </div>
+        </div>
+        <div class="principle-box">
+          <div class="principle-title">Fast Computation</div>
+          <div class="principle-desc">
+            Hash functions can quickly generate hashes for any input.
+          </div>
+        </div>
+        <div class="principle-box">
+          <div class="principle-title">Preimage Resistance</div>
+          <div class="principle-desc">
+            It should be infeasible to reconstruct the input from its hash.
+          </div>
+        </div>
+        <div class="principle-box">
+          <div class="principle-title">Collision Resistance</div>
+          <div class="principle-desc">
+            It is very unlikely two different inputs produce the same hash.
+          </div>
+        </div>
+        <div class="principle-box">
+          <div class="principle-title">Avalanche Effect</div>
+          <div class="principle-desc">
+            Small changes in input produce vastly different hashes.
+          </div>
+        </div>
+      </div>
+    </div>
+    <h2>Give it a go with my MD5 generator</h2>
+
+    <input type="text" id="inputText" placeholder="Enter text or number..." />
+    <button onclick="generateHash()">Hash It</button>
+
+    <div class="output" id="outputHash">MD5 hash will appear here</div>
+
+    <script>
+      function isInteger(value) {
+        return /^-?\d+$/.test(value)
+      }
+
+      function hashString(input) {
+        return SparkMD5.hash(input)
+      }
+
+      function hashInteger(intVal) {
+        const buffer = new ArrayBuffer(1)
+        new DataView(buffer).setInt8(0, intVal)
+        return SparkMD5.ArrayBuffer.hash(buffer)
+      }
+
+      function generateHash() {
+        const input = document.getElementById('inputText').value.trim()
+        let hash
+
+        if (isInteger(input)) {
+          // try to cast
+          const nint = parseInt(input, 10)
+          if (isNaN(nint)) {
+            hash = hashString(nint)
+          } else if (nint >= -128 && nint <= 127) {
+            // 1 byte signed int
+
+            hash = hashInteger(input)
+          } else {
+            // Don't worry about the buffer for purposes of this simple demo, treat as a string
+
+            hash = hashString(input)
+          }
+        } else {
+          hash = hashString(input)
+        }
+
+        document.getElementById('outputHash').innerText = hash
+      }
+    </script>
+  </body>
+</html> -->
+
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>MD5 Hash Demo</title>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      padding: 50px;
-      background-color: #f9f9f9;
-      text-align: center;
-    }
+  <head>
+    <meta charset="UTF-8" />
+    <title>Simple Multi-Page with Hamburger Menu</title>
+    <script src="https://cdn.jsdelivr.net/npm/spark-md5@3.0.2/spark-md5.min.js"></script>
+    <style>
+      /* Reset & base */
+      body {
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
+          Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #f7f9fc;
+        color: #222;
+        line-height: 1.6;
+      }
 
-    h1 {
-      color: #333;
-    }
+      /* Header and hamburger */
+      .header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 15px 20px;
+        background: #fff;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        position: sticky;
+        top: 0;
+        z-index: 1000;
+      }
 
-    input[type="text"] {
-      padding: 10px;
-      width: 300px;
-      font-size: 16px;
-    }
+      .header h1 {
+        margin: 0;
+        font-weight: 600;
+        font-size: 1.3rem;
+        color: #333;
+      }
 
-    button {
-      padding: 10px 20px;
-      font-size: 16px;
-      margin-left: 10px;
-      cursor: pointer;
-    }
+      /* Hamburger button */
+      .hamburger {
+        cursor: pointer;
+        width: 28px;
+        height: 22px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+      }
 
-    .output {
-      margin-top: 30px;
-      font-family: monospace;
-      background: #eee;
-      padding: 15px;
-      display: inline-block;
-      word-break: break-all;
-      max-width: 80%;
-    }
-  </style>
-</head>
-<body>
+      .hamburger div {
+        background: #333;
+        height: 3.5px;
+        border-radius: 2px;
+      }
 
-  <h1>MD5 Hash Generator</h1>
+      /* Nav menu (hidden by default) */
+      nav {
+        position: absolute;
+        top: 60px;
+        right: 20px;
+        background: white;
+        border: 1.5px solid #ddd;
+        border-radius: 8px;
+        width: 160px;
+        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+        display: none;
+        flex-direction: column;
+        font-weight: 600;
+      }
 
-  <input type="text" id="inputText" placeholder="Enter text here..." />
-  <button onclick="generateHash()">Hash It</button>
+      nav a {
+        padding: 12px 18px;
+        text-decoration: none;
+        color: #333;
+        border-bottom: 1px solid #eee;
+        transition: background-color 0.2s ease;
+        user-select: none;
+      }
 
-  <div class="output" id="outputHash">MD5 hash will appear here</div>
+      nav a:last-child {
+        border-bottom: none;
+      }
 
-  <script>
-    function generateHash() {
-      const input = document.getElementById('inputText').value;
-      const hash = CryptoJS.MD5(input).toString();
-      document.getElementById('outputHash').innerText = hash;
-    }
-  </script>
+      nav a:hover,
+      nav a:focus {
+        background-color: #f0f4f8;
+        outline: none;
+      }
 
-</body>
+      /* Show nav when active */
+      nav.active {
+        display: flex;
+      }
+
+      /* Main content container */
+      main {
+        padding: 40px 20px;
+        max-width: 900px;
+        margin: 0 auto;
+      }
+
+      /* Shared styles for all pages */
+      .page {
+        display: none;
+      }
+
+      .page.active {
+        display: block;
+      }
+
+      /* MD5 Demo inputs and button */
+      #md5-demo input[type='text'] {
+        padding: 10px 14px;
+        width: 100%;
+        max-width: 320px;
+        font-size: 16px;
+        border: 1.5px solid #ccc;
+        border-radius: 6px;
+        transition: border-color 0.3s ease;
+      }
+
+      #md5-demo input[type='text']:focus {
+        border-color: #5c9ded;
+        outline: none;
+        box-shadow: 0 0 5px rgba(92, 157, 237, 0.5);
+      }
+
+      #md5-demo button {
+        padding: 10px 22px;
+        font-size: 16px;
+        margin-left: 12px;
+        cursor: pointer;
+        background-color: #5c9ded;
+        border: none;
+        border-radius: 6px;
+        color: white;
+        font-weight: 600;
+        transition: background-color 0.3s ease;
+      }
+
+      #md5-demo button:hover,
+      #md5-demo button:focus {
+        background-color: #3a7bd5;
+        outline: none;
+      }
+
+      /* MD5 output box */
+      #md5-demo .output {
+        margin-top: 30px;
+        font-family: monospace;
+        background: #f5f7fa;
+        padding: 15px;
+        display: inline-block;
+        word-break: break-word;
+        max-width: 80%;
+        border-radius: 6px;
+        border: 1px solid #ddd;
+        color: #444;
+      }
+
+      /* Description styles for md5 demo */
+      #md5-demo .description {
+        max-width: 900px;
+        margin: 0 auto 50px auto;
+        text-align: left;
+        color: #444;
+      }
+
+      #md5-demo .description h2 {
+        text-align: center;
+        margin-bottom: 20px;
+        color: #222;
+      }
+
+      #md5-demo .principles-container {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 20px;
+      }
+
+      /* Keep these exactly as before (floating red boxes) */
+      #md5-demo .principle-box {
+        border: 2px solid #e74c3c;
+        border-radius: 8px;
+        padding: 20px;
+        width: 260px;
+        background: #fff0f0;
+        box-shadow: 0 4px 8px rgba(231, 76, 60, 0.2);
+        font-weight: 600;
+        color: #c0392b;
+        transition: transform 0.2s ease;
+      }
+
+      #md5-demo .principle-box:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 16px rgba(231, 76, 60, 0.35);
+      }
+
+      #md5-demo .principle-title {
+        font-size: 18px;
+        margin-bottom: 8px;
+        text-align: center;
+      }
+
+      #md5-demo .principle-desc {
+        font-size: 14px;
+        line-height: 1.4;
+        text-align: center;
+        color: #7f2d28;
+      }
+
+      /* Responsive adjustments */
+      @media (max-width: 600px) {
+        main {
+          padding: 30px 15px;
+        }
+        #md5-demo .principles-container {
+          flex-direction: column;
+          align-items: center;
+        }
+        #md5-demo .principle-box {
+          width: 90%;
+        }
+        #md5-demo input[type='text'],
+        #md5-demo button {
+          width: 100%;
+          margin-left: 0;
+          margin-top: 12px;
+        }
+        #md5-demo button {
+          max-width: none;
+        }
+        nav {
+          width: 140px;
+          right: 10px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header class="header">
+      <h1>My Simple Site</h1>
+      <div
+        class="hamburger"
+        id="hamburger"
+        aria-label="Toggle menu"
+        tabindex="0"
+        role="button"
+      >
+        <div></div>
+        <div></div>
+        <div></div>
+      </div>
+      <nav id="nav-menu" aria-label="Main navigation">
+        <a href="#" data-page="home">Home</a>
+        <a href="#" data-page="md5-demo">MD5 Demo</a>
+        <a href="#" data-page="server-info">What is a Server?</a>
+      </nav>
+    </header>
+
+    <main>
+      <section id="home" class="page active">
+        <h2>Hello!</h2>
+        <p>Welcome to the homepage.</p>
+      </section>
+
+      <section id="md5-demo" class="page">
+        <div class="description">
+          <h2>What is a Hash Function?</h2>
+          <p>
+            A hash function takes an input (or 'message') and returns a
+            fixed-size string of bytes. The output is typically a seemingly
+            random sequence of characters, known as the hash or digest. Hash
+            functions are widely used in security, data integrity, and many
+            computer science applications.
+          </p>
+          <div class="principles-container">
+            <div class="principle-box">
+              <div class="principle-title">Deterministic</div>
+              <div class="principle-desc">
+                The same input always produces the same output hash.
+              </div>
+            </div>
+            <div class="principle-box">
+              <div class="principle-title">Fixed Output Size</div>
+              <div class="principle-desc">
+                No matter the input size, the hash output length is always
+                constant.
+              </div>
+            </div>
+            <div class="principle-box">
+              <div class="principle-title">Fast Computation</div>
+              <div class="principle-desc">
+                Hash functions can quickly generate hashes for any input.
+              </div>
+            </div>
+            <div class="principle-box">
+              <div class="principle-title">Preimage Resistance</div>
+              <div class="principle-desc">
+                It should be infeasible to reconstruct the input from its hash.
+              </div>
+            </div>
+            <div class="principle-box">
+              <div class="principle-title">Collision Resistance</div>
+              <div class="principle-desc">
+                It is very unlikely two different inputs produce the same hash.
+              </div>
+            </div>
+            <div class="principle-box">
+              <div class="principle-title">Avalanche Effect</div>
+              <div class="principle-desc">
+                Small changes in input produce vastly different hashes.
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <h2>MD5 Hash Generator</h2>
+        <input
+          type="text"
+          id="inputText"
+          placeholder="Enter text or number..."
+        />
+        <button onclick="generateHash()">Hash It</button>
+        <div class="output" id="outputHash">MD5 hash will appear here</div>
+      </section>
+
+      <section id="server-info" class="page">
+        <h2>What is a Server?</h2>
+        <p>
+          A server is a computer or system that provides resources, data,
+          services, or programs to other computers, known as clients, over a
+          network. Servers can serve many clients simultaneously and often run
+          specialized software to manage these requests.
+        </p>
+        <p>
+          Common types of servers include web servers, database servers, and
+          file servers. They play a crucial role in enabling the internet and
+          many networked applications.
+        </p>
+      </section>
+    </main>
+
+    <script>
+      const hamburger = document.getElementById('hamburger')
+      const navMenu = document.getElementById('nav-menu')
+      const pages = document.querySelectorAll('.page')
+
+      // Toggle menu on hamburger click
+      hamburger.addEventListener('click', () => {
+        navMenu.classList.toggle('active')
+      })
+
+      // Allow keyboard toggle on hamburger (Enter or Space)
+      hamburger.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault()
+          navMenu.classList.toggle('active')
+        }
+      })
+
+      // Navigation link clicks
+      navMenu.querySelectorAll('a').forEach((link) => {
+        link.addEventListener('click', (e) => {
+          e.preventDefault()
+          const page = link.getAttribute('data-page')
+          if (!page) return
+
+          // Hide menu
+          navMenu.classList.remove('active')
+
+          // Show selected page, hide others
+          pages.forEach((p) => {
+            p.classList.toggle('active', p.id === page)
+          })
+        })
+      })
+
+      // Hashing function from your MD5 demo page
+      function isInteger(value) {
+        return /^-?\d+$/.test(value)
+      }
+
+      function hashString(input) {
+        return SparkMD5.hash(input)
+      }
+
+      function hashInteger(intVal) {
+        const buffer = new ArrayBuffer(1)
+        new DataView(buffer).setInt8(0, intVal)
+        return SparkMD5.ArrayBuffer.hash(buffer)
+      }
+
+      function generateHash() {
+        const input = document.getElementById('inputText').value.trim()
+        let hash
+
+        if (isInteger(input)) {
+          const nint = parseInt(input, 10)
+          if (isNaN(nint)) {
+            hash = hashString(nint)
+          } else if (nint >= -128 && nint <= 127) {
+            hash = hashInteger(nint)
+          } else {
+            hash = hashString(input)
+          }
+        } else {
+          hash = hashString(input)
+        }
+
+        document.getElementById('outputHash').innerText = hash
+      }
+    </script>
+  </body>
 </html>
