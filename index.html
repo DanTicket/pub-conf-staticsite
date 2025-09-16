@@ -5,16 +5,15 @@
     <title>Simple Multi-Page with Hamburger Menu</title>
     <script src="https://cdn.jsdelivr.net/npm/spark-md5@3.0.2/spark-md5.min.js"></script>
     <style>
-      /* Base & reset */
       body {
         font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
           Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
         margin: 0;
         padding: 0;
-        background-color: #f7f9fc;
-        color: #222;
+        background-color: #121212; /* Dark background */
+        color: #f0f0f0; /* Light text */
         line-height: 1.6;
-        font-size: clamp(14px, 1.6vw, 18px); /* Responsive font size */
+        font-size: clamp(14px, 1.6vw, 18px);
         min-height: 100vh;
         display: flex;
         flex-direction: column;
@@ -91,7 +90,7 @@
         outline: none;
       }
 
-      /* Show nav when active */
+      /* Show nav ONLY when active */
       nav.active {
         display: flex;
       }
@@ -114,6 +113,95 @@
 
       .page.active {
         display: block;
+      }
+      /* Style specifically for the #home section */
+      #home {
+        /* display: flex; */
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: 40px 20px;
+        min-height: 100vh;
+        background-color: #121212; /* dark background */
+        color: #f0f0f0;
+        text-align: center;
+      }
+
+      /* HOME SECTION STYLE */
+      /* Floating box with rainbow glow */
+      #home .floating-box {
+        background-color: #1e1e1e;
+        padding: 30px 20px;
+        border-radius: 12px;
+        max-width: 90%;
+        box-shadow: 0 0 8px red, 0 0 16px orange, 0 0 24px yellow,
+          0 0 32px green, 0 0 40px blue, 0 0 48px indigo, 0 0 56px violet;
+        transition: transform 0.3s ease;
+      }
+
+      #home .floating-box:hover {
+        transform: translateY(-5px);
+      }
+
+      /* Responsive typography */
+      #home h2 {
+        font-size: 1.8rem;
+        margin-bottom: 20px;
+        color: #ffffff;
+      }
+
+      #home p {
+        font-size: 1rem;
+        margin-bottom: 15px;
+        color: #cccccc;
+      }
+
+      /* MD5 demo styles */
+
+      .description-top {
+        background-color: #1e1e1e;
+        padding: 30px 20px;
+        border-radius: 12px;
+        max-width: 90%;
+        box-shadow: 0 0 4px red, 0 0 6px orange, 0 0 8px yellow, 0 0 10px green,
+          0 0 12px blue, 0 0 14px indigo, 0 0 16px violet;
+        transition: transform 0.3s ease;
+        margin-bottom: 3rem; /* scales with root font size */
+      }
+
+      .hash-stack {
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+        align-items: center;
+        justify-content: center;
+        max-width: 400px;
+        margin: 30px auto;
+        width: 100%;
+      }
+
+      .hash-stack input[type='text'],
+      .hash-stack button {
+        width: 100%;
+        box-sizing: border-box;
+      }
+
+      .hash-stack button {
+        background-color: #1e1e1e;
+        color: #ffffff;
+        font-weight: 600;
+        border: none;
+        padding: 12px 20px;
+        border-radius: 6px;
+        cursor: pointer;
+        box-shadow: 0 0 4px red, 0 0 6px orange, 0 0 8px yellow, 0 0 10px green,
+          0 0 12px blue, 0 0 14px indigo, 0 0 16px violet;
+        transition: transform 0.2s ease, background-color 0.3s ease;
+      }
+
+      .hash-stack button:hover {
+        transform: translateY(-2px);
+        background-color: #2a2a2a;
       }
 
       /* MD5 Demo inputs and button */
@@ -183,13 +271,13 @@
         max-width: 900px;
         margin: 0 auto 50px auto;
         text-align: left;
-        color: #444;
+        color: #f0f0f0; /* Light text */
       }
 
       #md5-demo .description h2 {
         text-align: center;
         margin-bottom: 20px;
-        color: #222;
+        color: #f0f0f0; /* Light text */
       }
 
       #md5-demo .principles-container {
@@ -293,9 +381,9 @@
         text-align: center;
       }
 
-      /* Show overlay and message when in portrait */
-      body.portrait #orientation-overlay,
-      body.portrait #rotate-message {
+      /* Show overlay and message when in landscape */
+      body.landscape #orientation-overlay,
+      body.landscape #rotate-message {
         opacity: 1;
         pointer-events: auto;
       }
@@ -310,15 +398,23 @@
         text-align: center;
         margin-bottom: 30px;
         font-size: 2rem;
-        color: #333;
+        color: #f0f0f0; /* Light text */
       }
 
       .link-group {
-        margin-bottom: 40px;
+        /* margin-bottom: 40px; */
+        background-color: #1e1e1e;
+        padding: 30px 20px;
+        border-radius: 12px;
+        max-width: 90%;
+        box-shadow: 0 0 4px red, 0 0 6px orange, 0 0 8px yellow, 0 0 10px green,
+          0 0 12px blue, 0 0 14px indigo, 0 0 16px violet;
+        transition: transform 0.3s ease;
+        margin-bottom: 3rem; /* scales with root font size */
       }
 
       .link-group h3 {
-        color: #444;
+        color: #f0f0f0; /* Light text */
         margin-bottom: 12px;
         font-size: 1.3rem;
       }
@@ -334,13 +430,13 @@
 
       .link-group a {
         text-decoration: none;
-        color: #2a6cdf;
+        color: #c1d7ff;
         font-weight: 500;
         transition: color 0.3s ease;
       }
 
       .link-group a:hover {
-        color: #174ea6;
+        color: #90b9fb;
         text-decoration: underline;
       }
 
@@ -359,7 +455,7 @@
   <body>
     <div id="orientation-overlay"></div>
     <div id="rotate-message">
-      Please rotate your device to landscape for the best experience
+      Please rotate your device to portrait for the best experience
     </div>
 
     <header class="header">
@@ -387,26 +483,30 @@
 
     <main>
       <section id="home" class="page active">
-        <h2>Welcome to Quantum Computation Fundamentals</h2>
-        <p>Turning puzzles into possibilities...</p>
-
-        <p>
-          Use the <b>menu at the top of the screen</b> to have a look over some
-          useful refreshers before the presentation begins!
-        </p>
+        <div class="floating-box">
+          <h2>Welcome to Quantum Computation Fundamentals</h2>
+          <p>Turning puzzles into possibilities...</p>
+          <p>
+            Use the <b>menu at the top of the screen</b> to have a look over
+            some useful refreshers before the presentation begins!
+          </p>
+          <p>Keep the dice on your seats safe, we'll use them later on...</p>
+        </div>
       </section>
 
       <section id="md5-demo" class="page">
         <div class="description">
-          <h2>What is a Hash Function?</h2>
-          <p>
-            A hash function takes an input (or 'message') and returns a
-            fixed-size string of bytes. The output is typically a seemingly
-            random sequence of characters, known as the hash or digest. Hash
-            functions are widely used in <b>security</b>,
-            <b>digital signatures</b>, <b>message authentication</b>,
-            <b>integrity</b>, and many other computer science applications.
-          </p>
+          <div class="description-top">
+            <h2>What is a Hash Function?</h2>
+            <p>
+              A hash function takes an input (or 'message') and returns a
+              fixed-size string of bytes. The output is typically a seemingly
+              random sequence of characters, known as the hash or digest. Hash
+              functions are widely used in <b>security</b>,
+              <b>digital signatures</b>, <b>message authentication</b>,
+              <b>integrity</b>, and many other computer science applications.
+            </p>
+          </div>
           <div class="principles-container">
             <div class="principle-box">
               <div class="principle-title">Deterministic</div>
@@ -447,15 +547,18 @@
             </div>
           </div>
         </div>
-
-        <h2>MD5 Hash Generator</h2>
-        <input
-          type="text"
-          id="inputText"
-          placeholder="Enter text or number..."
-        />
-        <button onclick="generateHash()">Hash It</button>
-        <div class="output" id="outputHash">MD5 hash will appear here</div>
+        <div class="description">
+          <h2>MD5 Hash Generator</h2>
+        </div>
+        <div class="hash-stack">
+          <input
+            type="text"
+            id="inputText"
+            placeholder="Enter text or number..."
+          />
+          <button onclick="generateHash()">Hash It</button>
+          <div class="output" id="outputHash">MD5 hash will appear here</div>
+        </div>
       </section>
 
       <section id="server-info" class="page">
@@ -591,10 +694,10 @@
       }
 
       function checkOrientation() {
-        if (window.matchMedia('(orientation: portrait)').matches) {
-          document.body.classList.add('portrait')
+        if (window.matchMedia('(orientation: landscape)').matches) {
+          document.body.classList.add('landscape')
         } else {
-          document.body.classList.remove('portrait')
+          document.body.classList.remove('landscape')
         }
       }
 
