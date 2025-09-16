@@ -257,9 +257,56 @@
           right: 10px;
         }
       }
+      /* Overlay with faint transparent red in portrait */
+      #orientation-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        background-color: rgba(255, 0, 0, 0.1); /* very faint red */
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 1.5s ease;
+        z-index: 9998;
+      }
+
+      /* Box prompting rotation */
+      #rotate-message {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background: white;
+        border: 2px solid #e74c3c;
+        border-radius: 12px;
+        padding: 20px 30px;
+        font-weight: 600;
+        color: #c0392b;
+        font-size: 1.2rem;
+        box-shadow: 0 4px 12px rgba(231, 76, 60, 0.25);
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 1.5s ease;
+        z-index: 9999;
+        max-width: 80vw;
+        text-align: center;
+      }
+
+      /* Show overlay and message when in portrait */
+      body.portrait #orientation-overlay,
+      body.portrait #rotate-message {
+        opacity: 1;
+        pointer-events: auto;
+      }
     </style>
   </head>
   <body>
+    <div id="orientation-overlay"></div>
+    <div id="rotate-message">
+      Please rotate your device to landscape for the best experience.
+    </div>
+
     <header class="header">
       <h1>My Simple Site</h1>
       <div
@@ -432,6 +479,21 @@
 
         document.getElementById('outputHash').innerText = hash
       }
+
+      function checkOrientation() {
+        if (window.matchMedia('(orientation: portrait)').matches) {
+          document.body.classList.add('portrait')
+        } else {
+          document.body.classList.remove('portrait')
+        }
+      }
+
+      // Initial check
+      checkOrientation()
+
+      // Listen for orientation changes and window resize (some browsers don’t fire orientationchange reliably)
+      window.addEventListener('orientationchange', checkOrientation)
+      window.addEventListener('resize', checkOrientation)
     </script>
   </body>
 </html>
